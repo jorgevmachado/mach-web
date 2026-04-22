@@ -1,5 +1,6 @@
+"use client";
 import React from 'react';
-import { useColor } from '@/app/ui/providers/color';
+import { useColor } from '@/app/utils';
 
 export default function Circle() {
   const { main } = useColor();

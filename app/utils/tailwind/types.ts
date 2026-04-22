@@ -137,5 +137,6 @@ export type TLineClamp = 1 | 2 | 3 | 4 | 5 | 6 | 'none';
 
 export type TBreak = 'normal' | 'words' | 'all' | 'keep';
 
+export type TWidth = '3xs' | '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full' | 'screen';
 
 export type TextWrap = 'wrap' | 'nowrap' | 'balance' | 'pretty';

@@ -78,19 +78,7 @@ export {
 } from './pagination';
 export {
   default as Text,
-  type TextAlign,
-  type TextBreak,
-  type TextDecoration,
-  type TextDisplay,
-  type TextFontFamily,
-  type TextLeading,
-  type TextLineClamp,
   type TextProps,
-  type TextSize,
   type TextTag,
   type TextTagProps,
-  type TextTone,
-  type TextTracking,
-  type TextTransform,
-  type TextWhitespace,
-  type TextWrap } from './text';
+} from './text';

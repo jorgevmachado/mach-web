@@ -43,6 +43,19 @@ export {
   type TTransform,
   type TWeight,
   type TWhitespace ,
-  WEIGHT_CLASS_MAP,  WHITESPACE_CLASS_MAP,  WRAP_CLASS_MAP } from './tailwind';
+  type TWidth,
+  WEIGHT_CLASS_MAP,
+  WHITESPACE_CLASS_MAP,
+  WRAP_CLASS_MAP,
+  WIDTH_CLASS_MAP
+} from './tailwind';
 export * from './url';
 export * from './window';
+export {
+  type ColorContextType,
+  type ColorType,
+  type ColorValue,
+  colorMap,
+  useColor,
+  ColorProvider
+} from './color';

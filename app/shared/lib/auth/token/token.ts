@@ -12,43 +12,43 @@ const encodeBase64Url = (value: string): string => {
   return Buffer.from(value).toString('base64url');
 };
 
-const decodeBase64Url = (value: string): string | null => {
+const decodeBase64Url = (value: string): string | undefined => {
   try {
     return Buffer.from(value, 'base64url').toString('utf-8');
   } catch {
-    return null;
+    return undefined;
   }
 };
 
-const parseTokenPayload = (token: string): SessionPayload | null => {
+const parseTokenPayload = (token: string): SessionPayload | undefined => {
   const tokenParts = token.split('.');
 
   if (tokenParts.length !== 3) {
-    return null;
+    return undefined;
   }
 
   const payloadAsString = decodeBase64Url(tokenParts[1]);
 
   if (!payloadAsString) {
-    return null;
+    return undefined;
   }
 
   try {
     return JSON.parse(payloadAsString) as SessionPayload;
   } catch {
-    return null;
+    return undefined;
   }
 };
 
-export const getAuthTokenExpiration = (token?: string): number | null => {
+export const getAuthTokenExpiration = (token?: string): number | undefined => {
   if (!token) {
-    return null;
+    return undefined;
   }
 
   const payload = parseTokenPayload(token);
 
   if (!payload?.exp) {
-    return null;
+    return undefined;
   }
 
   return payload.exp * 1000;

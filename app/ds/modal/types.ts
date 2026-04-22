@@ -1,5 +1,5 @@
 import React from 'react';
-import { TWidth } from '@/app/ui';
+import type { TWidth } from '@/app/utils';
 
 export type ModalProps = {
   title: string;

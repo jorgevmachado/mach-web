@@ -14,10 +14,10 @@ and utility helpers (`app/utils/`).
 
 ## Setup & Run
 ```bash
-npm install        # install dependencies
-npm run dev        # start dev server
-npm run build      # production build
-npm run lint       # ESLint check
+yarn install        # install dependencies
+yarn dev        # start dev server
+yarn build      # production build
+yarn lint       # ESLint check
 ```
 
 ## Patterns & Conventions

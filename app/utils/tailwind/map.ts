@@ -7,7 +7,7 @@ import {
   TLineClamp ,
   TPadding ,
   TShadow ,TSize ,TTone ,TTracking ,TTransform ,
-  TWeight ,TWhitespace ,
+  TWeight ,TWhitespace ,TWidth ,
 } from './types';
 
 export const WEIGHT_CLASS_MAP: Record<TWeight ,string> = {
@@ -216,4 +216,22 @@ export const WRAP_CLASS_MAP: Record<TextWrap, string> = {
   nowrap: 'text-nowrap',
   balance: 'text-balance',
   pretty: 'text-pretty',
+};
+
+export const WIDTH_CLASS_MAP: Record<TWidth, string> = {
+  '3xs': 'max-w-3xs',
+  '2xs': 'max-w-2xs',
+  xs: 'max-w-xs',
+  sm: 'max-w-sm',
+  md: 'max-w-md',
+  lg: 'max-w-lg',
+  xl: 'max-w-xl',
+  '2xl': 'max-w-2xl',
+  '3xl': 'max-w-3xl',
+  '4xl': 'max-w-4xl',
+  '5xl': 'max-w-5xl',
+  '6xl': 'max-w-6xl',
+  '7xl': 'max-w-7xl',
+  full: 'max-w-full',
+  screen: 'max-w-screen',
 };

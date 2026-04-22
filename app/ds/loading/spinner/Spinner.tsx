@@ -1,6 +1,6 @@
+"use client";
 import React from 'react';
-import { joinClass } from '@/app/utils';
-import { ColorProvider, ColorType } from '@/app/ui/providers/color';
+import { joinClass, ColorProvider, ColorType } from '@/app/utils';
 import Pokeball from './pokeball';
 import Circle from './circle';
 import Bar from './bar';
