@@ -4,6 +4,7 @@ import {
   LoginResponsePayload ,
   SignInParams ,
   SignUpParams,
+  RegisterResponse,
 } from '@/app/ui/features/auth/types';
 import { TUser } from '@/app/ui/features/auth/user/types';
 
@@ -14,7 +15,7 @@ export class AuthService extends BaseServiceAbstract {
   }
 
   public async login(params: SignInParams): Promise<string> {
-    const response = await this.post<SignInParams, LoginResponsePayload>(`${this.pathUrl}/token`, {
+    const response = await this.post<SignInParams, LoginResponsePayload>(`${this.pathUrl}/login`, {
       body: params,
     });
 
@@ -25,8 +26,8 @@ export class AuthService extends BaseServiceAbstract {
     return await this.get<TUser>(`${this.pathUrl}/me`);
   }
 
-  public async register(payload: SignUpParams): Promise<TUser> {
-    return await this.post<SignUpParams, TUser>('trainers', {
+  public async register(payload: SignUpParams): Promise<RegisterResponse> {
+    return await this.post<SignUpParams, RegisterResponse>(`${this.pathUrl}/register`, {
       body: payload,
     });
   }

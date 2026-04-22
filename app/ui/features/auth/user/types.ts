@@ -1,10 +1,16 @@
 import React from 'react';
 
+export type StatusEnum = 'ACTIVE' | 'COMPLETE' | 'INACTIVE' | 'INCOMPLETE';
+
 export type TUser = {
   id: string;
-  created_at: Date;
-  updated_at: Date;
-  deleted_at?: Date;
+  name: string;
+  email: string;
+  username: string;
+  status: StatusEnum;
+  created_at: string;
+  updated_at: string | null;
+  deleted_at?: string | null;
 }
 
 export type UserProviderProps = {

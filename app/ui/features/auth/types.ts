@@ -1,3 +1,5 @@
+import { StatusEnum } from './user/types';
+
 export type SignUpParams = {
   name: string;
   email: string;
@@ -8,12 +10,20 @@ export type SignUpParams = {
 }
 
 export type SignInParams = {
-  email: string;
-  username?: string;
+  credential: string;
   password: string;
 }
 
 export type LoginResponsePayload = {
   token_type: string;
   access_token: string;
+}
+
+export type RegisterResponse = {
+  id: string;
+  name: string;
+  email: string;
+  username: string;
+  status: StatusEnum;
+  created_at: string;
 }

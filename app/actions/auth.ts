@@ -4,19 +4,19 @@ import { redirect } from 'next/navigation';
 
 import {
   isStrongPassword,
-  isValidEmail,
   PASSWORD_RULE_MESSAGE,
 } from '@/app/shared/lib/auth';
 import type { AuthActionState } from '@/app/shared/lib/auth/action-state';
 import { clearAuthCookie, setAuthCookie } from '@/app/shared/lib/auth/server';
 import type { ResponseError } from '@/app/shared/services/http';
 import { authService } from '@/app/ui/features/auth/service';
-import { SignInParams } from '@/app/ui/features/auth/types';
+import { SignInParams, SignUpParams } from '@/app/ui/features/auth/types';
 
-const INVALID_EMAIL_MESSAGE = 'Please enter a valid email address.';
+const INVALID_CREDENTIAL_MESSAGE = 'Please enter your email or username.';
 const INVALID_FULL_NAME_MESSAGE = 'Please enter your full name.';
 const INVALID_BIRTH_DATE_MESSAGE = 'Please provide your birth date.';
 const INVALID_GENDER_MESSAGE = 'Please select your gender.';
+const INVALID_USERNAME_MESSAGE = 'Please enter a username.';
 const PASSWORD_CONFIRMATION_MESSAGE = 'Password confirmation does not match.';
 const DEFAULT_LOGIN_ERROR_MESSAGE = 'Unable to sign in. Please try again.';
 
@@ -45,7 +45,7 @@ const toErrorState = (message: string): AuthActionState => {
 
 const readLoginPayload = (formData: FormData): SignInParams => {
   return {
-    email: getStringValue(formData, 'email'),
+    credential: getStringValue(formData, 'credential'),
     password: getStringValue(formData, 'password'),
   };
 };
@@ -62,9 +62,9 @@ const readRegisterPayload = (formData: FormData): RegisterUserPayload => {
   };
 };
 
-const validateLoginPayload = ({ email, password }: SignInParams): AuthActionState | null => {
-  if (!isValidEmail(email)) {
-    return toErrorState(INVALID_EMAIL_MESSAGE);
+const validateLoginPayload = ({ credential, password }: SignInParams): AuthActionState | null => {
+  if (!credential || credential.length === 0) {
+    return toErrorState(INVALID_CREDENTIAL_MESSAGE);
   }
 
   if (!isStrongPassword(password)) {
@@ -76,18 +76,23 @@ const validateLoginPayload = ({ email, password }: SignInParams): AuthActionStat
 
 const validateRegisterPayload = ({
   email,
+  username,
   fullName,
   birthDate,
   gender,
   password,
   confirmPassword,
 }: RegisterUserPayload): AuthActionState | null => {
-  if (!isValidEmail(email)) {
-    return toErrorState(INVALID_EMAIL_MESSAGE);
-  }
-
   if (!fullName || fullName.length < 3) {
     return toErrorState(INVALID_FULL_NAME_MESSAGE);
+  }
+
+  if (!email || !email.includes('@')) {
+    return toErrorState('Please enter a valid email address.');
+  }
+
+  if (!username || username.length === 0) {
+    return toErrorState(INVALID_USERNAME_MESSAGE);
   }
 
   if (!birthDate) {
@@ -148,19 +153,19 @@ export async function registerAction(_: AuthActionState, formData: FormData): Pr
     const service = authService();
     await service.register({
       name: payload.fullName,
-      username: payload.fullName,
+      username: payload.username,
       email: payload.email,
       gender: payload.gender,
       password: payload.password,
       date_of_birth: payload.birthDate,
-    });
+    } satisfies SignUpParams);
   } catch (error) {
     return mapLoginError(error);
   }
 
   return {
     status: 'success',
-    message: 'User registered successfully. You can sign in now.',
+    message: 'Account created! Please log in.',
   };
 }
 

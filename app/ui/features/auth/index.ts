@@ -3,6 +3,7 @@ export {
 } from './service';
 export type {
   LoginResponsePayload,
+  RegisterResponse,
   SignUpParams,
   SignInParams,
 } from './types';
