@@ -117,7 +117,7 @@ export abstract class Http {
 
     try {
       json = await response.json();
-    } catch (error) {
+    } catch {
       json = undefined;
     }
 

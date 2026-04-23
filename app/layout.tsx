@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import './globals.css';
 import React from 'react';
 import { getServerSession } from '@/app/shared/lib/auth/server';
 import {
@@ -13,18 +13,18 @@ import {
 } from '@/app/ui/features/auth/user/server';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Machado",
-  description: "%s | Machado",
+  title: 'Machado',
+  description: '%s | Machado',
 };
 
 export default async function RootLayout({
@@ -44,22 +44,22 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
-    <body className='antialiased'>
-    <AlertProvider>
-      <UserProvider
-        key={session.token || 'guest-session'}
-        initialUser={initialUser}
-        isAuthenticated={isAuthenticated}
-        tokenExpiresAt={isAuthenticated ? tokenExpiresAt : undefined}
-      >
-        <LoadingProvider>
-          <BreadcrumbProvider>
-            <NavigationFrame isAuthenticated={isAuthenticated}>{children}</NavigationFrame>
-          </BreadcrumbProvider>
-        </LoadingProvider>
-      </UserProvider>
-    </AlertProvider>
-    </body>
+      <body className='antialiased'>
+        <AlertProvider>
+          <UserProvider
+            key={session.token || 'guest-session'}
+            initialUser={initialUser}
+            isAuthenticated={isAuthenticated}
+            tokenExpiresAt={isAuthenticated ? tokenExpiresAt : undefined}
+          >
+            <LoadingProvider>
+              <BreadcrumbProvider>
+                <NavigationFrame isAuthenticated={isAuthenticated}>{children}</NavigationFrame>
+              </BreadcrumbProvider>
+            </LoadingProvider>
+          </UserProvider>
+        </AlertProvider>
+      </body>
     </html>
   );
 }

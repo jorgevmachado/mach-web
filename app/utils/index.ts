@@ -1,4 +1,11 @@
 export * from './array';
+export {
+  type ColorContextType,
+  colorMap,
+  ColorProvider,
+  type ColorType,
+  type ColorValue,
+  useColor } from './color';
 export { default as joinClass } from './join-class';
 export * from './number';
 export * from './object';
@@ -46,16 +53,7 @@ export {
   type TWidth,
   WEIGHT_CLASS_MAP,
   WHITESPACE_CLASS_MAP,
-  WRAP_CLASS_MAP,
-  WIDTH_CLASS_MAP
-} from './tailwind';
+  WIDTH_CLASS_MAP,
+  WRAP_CLASS_MAP } from './tailwind';
 export * from './url';
 export * from './window';
-export {
-  type ColorContextType,
-  type ColorType,
-  type ColorValue,
-  colorMap,
-  useColor,
-  ColorProvider
-} from './color';

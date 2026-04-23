@@ -4,12 +4,10 @@ export {
 export type {
   LoginResponsePayload,
   RegisterResponse,
-  SignUpParams,
   SignInParams,
+  SignUpParams,
 } from './types';
-
 export {
   type TUser,
-  useUser,
-  UserProvider
-} from './user';
+  UserProvider,
+  useUser } from './user';

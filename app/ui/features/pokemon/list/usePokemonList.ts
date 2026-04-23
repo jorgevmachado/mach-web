@@ -3,7 +3,7 @@
 import type { FiltersProps } from '@/app/ds';
 
 import type { PokemonFilters, TPokemon, UsePokemonListResult } from '../types';
-import usePaginatedList from "@/app/ui/hooks/list";
+import usePaginatedList from '@/app/ui/hooks/list';
 
 const INITIAL_FILTERS: PokemonFilters = {
   name: '',

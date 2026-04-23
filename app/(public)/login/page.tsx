@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { INITIAL_AUTH_ACTION_STATE } from '@/app/shared/lib/auth';
 import { loginAction } from '@/app/actions/auth';
-import { Text, Button } from '@/app/ds'
+import { Text, Button } from '@/app/ds';
 
 export default function LoginPage() {
   const [state, formAction, isPending] = useActionState(loginAction, INITIAL_AUTH_ACTION_STATE);

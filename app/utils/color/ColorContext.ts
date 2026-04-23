@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { createContext } from 'react';
 
 export type ColorType = 'primary' | 'secondary' | 'info' | 'warning' | 'error' | 'neutral';

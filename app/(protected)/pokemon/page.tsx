@@ -1,5 +1,5 @@
 export default function PokemonPage() {
-  return(
+  return (
     <h1>Pokemon</h1>
-  )
+  );
 }

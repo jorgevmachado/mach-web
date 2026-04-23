@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React from 'react';
 import { joinClass, ColorProvider, ColorType } from '@/app/utils';
 import Pokeball from './pokeball';

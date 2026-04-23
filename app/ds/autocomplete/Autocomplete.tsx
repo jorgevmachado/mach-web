@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useState } from 'react';
 
 import Input from '@/app/ds/input';
 import { joinClass } from '@/app/utils';
@@ -32,8 +32,14 @@ const Autocomplete = ({
   const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
   const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
 
-  React.useEffect(() => {
-    setInputValue(value);
+  useLayoutEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setInputValue(value);
+    }, 0);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
   }, [value]);
 
   const normalizedQuery = useMemo(() => {

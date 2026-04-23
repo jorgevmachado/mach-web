@@ -38,7 +38,7 @@ export function convertSubPathUrl({ by, pathUrl, isParam, subPathUrl, conectorPa
 }
 
 export function sanitizedParams(value: string | null): string | undefined {
-  if(!value) {
+  if (!value) {
     return;
   }
 

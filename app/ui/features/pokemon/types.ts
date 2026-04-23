@@ -1,4 +1,4 @@
-import {FiltersProps, TListQuery, TPaginatedListResponse} from "@/app/ds";
+import { FiltersProps, TListQuery, TPaginatedListResponse } from '@/app/ds';
 
 export type TPokemon = {
     id: string;

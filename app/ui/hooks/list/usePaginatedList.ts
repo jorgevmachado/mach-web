@@ -90,19 +90,12 @@ const usePaginatedList = <TItem, TFilters>({
   const requestIdRef = useRef(0);
   const { startContentLoading, stopContentLoading } = useLoading();
 
-  const fetchPage = useCallback(async (page: number, activeFilters: TFilters, per_page: number = 12): Promise<void> => {
+  const fetchPage = useCallback(async (page: number, activeFilters: TFilters, perPage: number = 12): Promise<void> => {
     const requestId = requestIdRef.current + 1;
     requestIdRef.current = requestId;
 
-    setState((previousState) => ({
-      ...previousState,
-      isLoading: true,
-      errorMessage: undefined,
-    }));
-    startContentLoading();
-
     try {
-      const queryString = buildQueryString(page, per_page, activeFilters);
+      const queryString = buildQueryString(page, perPage, activeFilters);
       const response = await fetch(`${endpoint}?${queryString}`, {
         method: 'GET',
         cache: 'no-store',
@@ -152,11 +145,28 @@ const usePaginatedList = <TItem, TFilters>({
     } finally {
       stopContentLoading();
     }
-  }, [buildQueryString, endpoint, fetchErrorMessage, startContentLoading, stopContentLoading]);
+  }, [buildQueryString, endpoint, fetchErrorMessage, stopContentLoading]);
+
+  const requestPage = useCallback((page: number, activeFilters: TFilters, perPage: number = 12): void => {
+    setState((previousState) => ({
+      ...previousState,
+      isLoading: true,
+      errorMessage: undefined,
+    }));
+    startContentLoading();
+    void fetchPage(page, activeFilters, perPage);
+  }, [fetchPage, startContentLoading]);
 
   useEffect(() => {
-    void fetchPage(1, filters);
-  }, [fetchPage, filters]);
+    const timeoutId = window.setTimeout(() => {
+      startContentLoading();
+      void fetchPage(1, initialFilters);
+    }, 0);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [fetchPage, initialFilters, startContentLoading]);
 
   const goToPage = useCallback((page: number) => {
     const targetPage = clampPage(page, state.meta.total_pages);
@@ -165,12 +175,15 @@ const usePaginatedList = <TItem, TFilters>({
       return;
     }
 
-    void fetchPage(targetPage, filters);
-  }, [fetchPage, filters, state.isLoading, state.meta.current_page, state.meta.total_pages]);
+    requestPage(targetPage, filters);
+  }, [filters, requestPage, state.isLoading, state.meta.current_page, state.meta.total_pages]);
 
   const applyFilters = useCallback((nextFilters: TFilters) => {
-    setFilters(normalizeFilters(nextFilters));
-  }, [normalizeFilters]);
+    const normalizedFilters = normalizeFilters(nextFilters);
+
+    setFilters(normalizedFilters);
+    requestPage(1, normalizedFilters);
+  }, [normalizeFilters, requestPage]);
 
   const applyInputFilters = useCallback((nextFilters: TFilters) => {
     setInputFilters((previousState) => {
@@ -191,7 +204,8 @@ const usePaginatedList = <TItem, TFilters>({
 
   const clearFilters = useCallback(() => {
     setFilters(initialFilters);
-  }, [initialFilters]);
+    requestPage(1, initialFilters);
+  }, [initialFilters, requestPage]);
 
   const clearInputFilters = useCallback(() => {
     setInputFilters((previousState) => {
@@ -209,8 +223,8 @@ const usePaginatedList = <TItem, TFilters>({
   }, []);
 
   const reload = useCallback(() => {
-    void fetchPage(state.meta.current_page, filters);
-  }, [fetchPage, filters, state.meta.current_page]);
+    requestPage(state.meta.current_page, filters);
+  }, [filters, requestPage, state.meta.current_page]);
 
   return {
     items: state.items,
