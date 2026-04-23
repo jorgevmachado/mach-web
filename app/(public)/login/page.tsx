@@ -5,15 +5,16 @@ import Link from 'next/link';
 
 import { INITIAL_AUTH_ACTION_STATE } from '@/app/shared/lib/auth';
 import { loginAction } from '@/app/actions/auth';
+import { Text, Button } from '@/app/ds'
 
 export default function LoginPage() {
   const [state, formAction, isPending] = useActionState(loginAction, INITIAL_AUTH_ACTION_STATE);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-md p-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Sign in</h1>
-        <p className="text-sm text-gray-500 mb-6">Welcome back! Enter your credentials below.</p>
+        <Text weight="bold" size="2xl" color="text-gray-900" className="mb-2">Sign in</Text>
+        <Text size="sm" color="text-gray-500" className="mb-6">Welcome back! Enter your credentials below.</Text>
 
         <form action={formAction} className="space-y-4">
           <div>
@@ -52,21 +53,21 @@ export default function LoginPage() {
             </p>
           )}
 
-          <button
+          <Button
             type="submit"
             disabled={isPending}
-            className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-medium py-2 px-4 rounded-lg text-sm transition-colors"
+            className="w-full py-2 px-4"
           >
             {isPending ? 'Signing in…' : 'Sign in'}
-          </button>
+          </Button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-500">
+        <Text size="sm" color="text-gray-500" className="text-center">
           Don&apos;t have an account?{' '}
           <Link href="/register" className="text-indigo-600 hover:underline font-medium">
             Sign up
           </Link>
-        </p>
+        </Text>
       </div>
     </div>
   );

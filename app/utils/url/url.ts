@@ -36,3 +36,13 @@ export function convertSubPathUrl({ by, pathUrl, isParam, subPathUrl, conectorPa
   }
   return `${currentPathUrl}/${conectorPath}/${subPathUrl}`;
 }
+
+export function sanitizedParams(value: string | null): string | undefined {
+  if(!value) {
+    return;
+  }
+
+  const trimmedValue = value.trim();
+
+  return trimmedValue || undefined;
+}

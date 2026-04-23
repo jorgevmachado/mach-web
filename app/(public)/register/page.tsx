@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { INITIAL_AUTH_ACTION_STATE } from '@/app/shared/lib/auth';
 import { registerAction } from '@/app/actions/auth';
+import { Text, Button } from '@/app/ds';
 
 export default function RegisterPage() {
   const [state, formAction, isPending] = useActionState(registerAction, INITIAL_AUTH_ACTION_STATE);
@@ -34,8 +35,8 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-8">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-md p-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Create an account</h1>
-        <p className="text-sm text-gray-500 mb-6">Fill in the details below to get started.</p>
+        <Text as="h1" size="2xl" color="text-gray-900" weight="bold" className="mb-2">Create an account</Text>
+        <Text size="sm" color="text-gray-500" className="mb-6">Fill in the details below to get started.</Text>
 
         <form action={formAction} className="space-y-4">
           <div>
@@ -142,26 +143,26 @@ export default function RegisterPage() {
           </div>
 
           {state.status === 'error' && (
-            <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+            <Text size="sm" color="text-red-600" className="bg-red-50 border border-red-200 rounded-lg px-3 py-2">
               {state.message}
-            </p>
+            </Text>
           )}
 
-          <button
+          <Button
             type="submit"
             disabled={isPending}
-            className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-medium py-2 px-4 rounded-lg text-sm transition-colors"
+            className="w-full py-2 px-4"
           >
             {isPending ? 'Creating account…' : 'Create account'}
-          </button>
+          </Button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-500">
+        <Text size="sm" color="text-gray-500" className="mt-6 text-center">
           Already have an account?{' '}
           <Link href="/login" className="text-indigo-600 hover:underline font-medium">
             Sign in
           </Link>
-        </p>
+        </Text>
       </div>
     </div>
   );

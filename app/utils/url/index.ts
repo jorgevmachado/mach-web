@@ -1,2 +1,2 @@
 export type { TConvertSubPathUrlParams } from './types';
-export { convertSubPathUrl, formatUrl, serialize_url } from './url';
+export { convertSubPathUrl, formatUrl, serialize_url, sanitizedParams } from './url';
