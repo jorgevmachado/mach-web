@@ -3,6 +3,7 @@
 import { Card, Filters, Image, Pagination, Text } from '@/app/ds';
 import Pokeball from '@/app/ds/loading/spinner/pokeball';
 import { usePokemonList } from '@/app/ui/features/pokemon';
+import { useRouter } from 'next/navigation';
 
 const STATUS_TONE_MAP: Record<string, string> = {
   COMPLETE: 'text-emerald-700',
@@ -12,6 +13,7 @@ const STATUS_TONE_MAP: Record<string, string> = {
 };
 
 export default function PokemonPage() {
+  const router = useRouter();
   const {
     items,
     meta,
@@ -75,13 +77,38 @@ export default function PokemonPage() {
           {items.map((pokemon) => {
             const imageSrc = pokemon.image || pokemon.external_image;
             const shouldShowPlaceholder = pokemon.status === 'INCOMPLETE';
+            const isNavigable = pokemon.status === 'COMPLETE';
             return (
               <Card
                 key={pokemon.id}
+                as="div"
                 variant="elevated"
                 rounded="2xl"
-                hoverEffect="lift"
-                className="border border-white/80 bg-white/90"
+                hoverEffect={isNavigable ? 'lift' : 'none'}
+                interactive={isNavigable}
+                role={isNavigable ? 'button' : undefined}
+                tabIndex={isNavigable ? 0 : -1}
+                aria-disabled={!isNavigable}
+                onClick={() => {
+                  if (!isNavigable) {
+                    return;
+                  }
+
+                  router.push(`/pokemon/${pokemon.name}`);
+                }}
+                onKeyDown={(event) => {
+                  if (!isNavigable) {
+                    return;
+                  }
+
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    router.push(`/pokemon/${pokemon.name}`);
+                  }
+                }}
+                className={isNavigable
+                  ? 'border border-white/80 bg-white/90'
+                  : 'border border-white/80 bg-white/90 opacity-95'}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="space-y-2">

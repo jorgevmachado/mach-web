@@ -1,6 +1,6 @@
 import { BaseServiceAbstract } from '@/app/shared/services/service/service';
 import { TPaginatedListResponse } from '@/app/ds';
-import { PokemonListQuery, TPokemon } from '@/app/ui';
+import { PokemonListQuery, TPokemon, TPokemonDetail } from '@/app/ui';
 import { omitUndefined } from '@/app/utils';
 
 export class PokemonService extends BaseServiceAbstract {
@@ -15,7 +15,7 @@ export class PokemonService extends BaseServiceAbstract {
     );
   }
 
-  public async detail(name: string): Promise<TPokemon> {
-    return await this.get<TPokemon>(`${this.pathUrl}/${name}`);
+  public async detail(name: string): Promise<TPokemonDetail> {
+    return await this.get<TPokemonDetail>(`${this.pathUrl}/${name}`);
   }
 }
