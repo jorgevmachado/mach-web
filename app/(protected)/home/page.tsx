@@ -75,7 +75,7 @@ export default function Home() {
           </dl>
 
           {/* INITIALIZE button */}
-          {user.status === 'INCOMPLETE' && (
+          {user.status === 'INCOMPLETE' || user.pokedex_status !== 'READY' && (
             <div className="mt-6 pt-6 border-t border-gray-100">
               <p className="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-4">
                 Complete your profile by initializing your trainer.

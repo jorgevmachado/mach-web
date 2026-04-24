@@ -1,5 +1,5 @@
 import { BaseServiceAbstract } from '@/app/shared/services/service/service';
-import { InitializeTrainerParams, TrainerResponse } from '@/app/ui/features/trainer/types';
+import { InitializeTrainerParams, TrainerMeResponse, TrainerResponse } from '@/app/ui/features/trainer/types';
 
 export class TrainerService extends BaseServiceAbstract {
   constructor(baseUrl: string, token: string) {
@@ -11,5 +11,9 @@ export class TrainerService extends BaseServiceAbstract {
       `${this.pathUrl}/initialize`,
       { body: params },
     );
+  }
+
+  public async me(): Promise<TrainerMeResponse> {
+    return await this.get<TrainerMeResponse>(`${this.pathUrl}/me`);
   }
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Badge, BarChart, Card, Image, Text } from '@/app/ds';
 import Pokeball from '@/app/ds/loading/spinner/pokeball';
@@ -55,10 +55,6 @@ type PokemonDetailPageProps = {
 export default function PokemonDetailPage({ name }: PokemonDetailPageProps) {
   const { pokemon, isLoading, errorMessage } = usePokemonDetail(name);
   const [visibleMoves, setVisibleMoves] = useState<number>(MOVES_PAGE_SIZE);
-
-  useEffect(() => {
-    setVisibleMoves(MOVES_PAGE_SIZE);
-  }, [pokemon?.id]);
 
   if (isLoading) {
     return (
@@ -302,7 +298,7 @@ export default function PokemonDetailPage({ name }: PokemonDetailPageProps) {
                   </button>
                 </div>
               ) : null}
-          </div>
+            </div>
           </Card>
 
           <Card variant="elevated" rounded="2xl" className="border border-white/80 bg-white/90">
