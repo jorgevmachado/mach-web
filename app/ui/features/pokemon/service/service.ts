@@ -8,9 +8,9 @@ export class PokemonService extends BaseServiceAbstract {
     super(baseUrl, 'pokemon', token);
   }
 
-  public async list(params: PokemonListQuery = {}): Promise<TPaginatedListResponse<TPokemon> | Array<TPokemon>> {
+  public async list(params: PokemonListQuery = {}): Promise<TPaginatedListResponse<TPokemon>> {
     const sanitizedParams = omitUndefined(params);
-    return await this.get<TPaginatedListResponse<TPokemon> | Array<TPokemon>>(
+    return await this.get<TPaginatedListResponse<TPokemon>>(
       this.pathUrl, { params: { ...sanitizedParams } }
     );
   }

@@ -106,7 +106,7 @@ describe('usePaginatedList', () => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    expect(fetchMock).toHaveBeenCalledWith('/api/test-pokemon?page=1', {
+    expect(fetchMock).toHaveBeenCalledWith('/api/test-pokemon?page=1&limit=12', {
       method: 'GET',
       cache: 'no-store',
     });
@@ -150,7 +150,7 @@ describe('usePaginatedList', () => {
     });
 
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenLastCalledWith('/api/test-pokemon?page=1&name=pikachu&order=25', {
+      expect(fetchMock).toHaveBeenLastCalledWith('/api/test-pokemon?page=1&limit=12&name=pikachu&order=25', {
         method: 'GET',
         cache: 'no-store',
       });
@@ -213,7 +213,7 @@ describe('usePaginatedList', () => {
     });
 
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenLastCalledWith('/api/test-pokemon?page=1', {
+      expect(fetchMock).toHaveBeenLastCalledWith('/api/test-pokemon?page=1&limit=12', {
         method: 'GET',
         cache: 'no-store',
       });
