@@ -1,3 +1,5 @@
+export type PokedexStatusEnum = 'EMPTY' | 'INITIALIZING' | 'READY' | 'FAILED';
+
 export type InitializeTrainerParams = {
   pokeballs: number;
   capture_rate: number;
@@ -9,7 +11,7 @@ export type TrainerResponse = {
   user_id: string;
   pokeballs: number;
   capture_rate: number;
-  pokedex_status: 'EMPTY' | 'INITIALIZING' | 'READY' | 'FAILED';
+  pokedex_status: PokedexStatusEnum;
   pokemon_name?: string | null;
   created_at: string;
 };
@@ -19,8 +21,16 @@ export type TrainerMeResponse = {
   user_id: string;
   pokeballs: number;
   capture_rate: number;
-  pokedex_status: 'EMPTY' | 'INITIALIZING' | 'READY' | 'FAILED';
+  pokedex_status: PokedexStatusEnum;
   created_at: string;
   updated_at?: string | null;
   deleted_at?: string | null;
 };
+
+export type TTrainer = {
+  id: string;
+  user_id: string;
+  pokeballs: number;
+  capture_rate: number;
+  pokedex_status: PokedexStatusEnum;
+}
