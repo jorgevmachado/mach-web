@@ -1,15 +1,17 @@
 import { TPaginatedListResponse } from '@/app/ds';
 import { BaseServiceAbstract } from '@/app/shared/services/service/service';
-
+import { omitUndefined } from '@/app/utils';
 import { MyPokemonListQuery, TMyPokemonDetail, TMyPokemonEntry } from '../types';
+
 
 export class MyPokemonService extends BaseServiceAbstract {
   constructor(baseUrl: string, token?: string) {
     super(baseUrl, 'my-pokemon', token);
   }
 
-  public async list(params: MyPokemonListQuery = {}): Promise<TPaginatedListResponse<TMyPokemonEntry>> {
-    return await this.get<TPaginatedListResponse<TMyPokemonEntry>>(this.pathUrl, { params });
+  public async list(params: MyPokemonListQuery = {}): Promise<TPaginatedListResponse<TMyPokemonEntry> | Array<TMyPokemonEntry>> {
+    const sanitizedParams = omitUndefined(params);
+    return await this.get<TPaginatedListResponse<TMyPokemonEntry> | Array<TMyPokemonEntry>>(this.pathUrl, { params: { ...sanitizedParams } });
   }
 
   public async detail(id: string): Promise<TMyPokemonDetail> {

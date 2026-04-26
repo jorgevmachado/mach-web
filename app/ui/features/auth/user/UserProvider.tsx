@@ -10,7 +10,7 @@ type ApiUserErrorResponse = {
   message?: string;
 };
 
-const isTrainer = (value: unknown): value is TUser => {
+const isUser = (value: unknown): value is TUser => {
   if (!value || typeof value !== 'object') {
     return false;
   }
@@ -57,7 +57,7 @@ const UserProvider = ({
 
       const json = (await response.json()) as TUser | ApiUserErrorResponse;
 
-      if (!response.ok || !isTrainer(json)) {
+      if (!response.ok || !isUser(json)) {
         if (response.status === 401) {
           invalidateSession();
           return undefined;
@@ -143,4 +143,3 @@ const UserProvider = ({
 };
 
 export default React.memo(UserProvider);
-

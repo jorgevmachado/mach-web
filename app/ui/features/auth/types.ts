@@ -1,5 +1,5 @@
 import { StatusEnum } from './user/types';
-import {TTrainer} from "@/app/ui/features/trainer";
+import type { TTrainer } from '@/app/ui/features/trainer';
 
 export type SignUpParams = {
   name: string;
@@ -28,4 +28,4 @@ export type RegisterResponse = {
   trainer?: TTrainer;
   username: string;
   created_at: string;
-}
+};

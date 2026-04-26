@@ -1,4 +1,5 @@
 import React from 'react';
+import type { TrainerMeResponse } from '@/app/ui/features/trainer/types';
 
 export type StatusEnum = 'ACTIVE' | 'COMPLETE' | 'INACTIVE' | 'INCOMPLETE';
 
@@ -8,10 +9,11 @@ export type TUser = {
   email: string;
   username: string;
   status: StatusEnum;
+  trainer?: TrainerMeResponse | null;
   created_at: string;
-  updated_at: string | null;
+  updated_at?: string | null;
   deleted_at?: string | null;
-}
+};
 
 export type UserProviderProps = {
   children: React.ReactNode;
@@ -28,4 +30,3 @@ export type UserContextValue = {
   refreshUser: () => Promise<TUser | undefined>;
   isAuthenticated: boolean;
 };
-

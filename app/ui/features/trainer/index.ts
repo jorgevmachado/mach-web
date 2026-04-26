@@ -1,2 +1,2 @@
 export { trainerService } from './service';
-export type { InitializeTrainerParams, TrainerResponse, TTrainer } from './types';
+export type { InitializeTrainerParams, TrainerMeResponse, TrainerResponse, TTrainer } from './types';
